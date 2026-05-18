@@ -2,7 +2,7 @@
 
 This driver is designed to support SPI NAND Flash with ESP chipsets.
 
-This component incorporates the [dhara library](https://github.com/dlbeer/dhara), licenced under the [LICENCE](https://github.com/dlbeer/dhara/blob/master/LICENSE)
+This component incorporates the [dhara library](https://github.com/dlbeer/dhara) via the `espressif/dhara` component (vendored in-tree; no separate submodule checkout required), licenced under the [LICENCE](https://github.com/dlbeer/dhara/blob/master/LICENSE)
 
 ## About SPI NAND Flash
 SPI NAND Flash combines the benefits of NAND Flash technology with the simplicity of the SPI interface, providing an efficient and cost-effective solution for non-volatile data storage in diverse applications. Its versatility, reliability, and affordability make it a popular choice for many embedded systems and electronic devices.
@@ -59,6 +59,8 @@ For layered architecture, BDL usage, API details, and **upgrading from 0.x to 1.
 
 - **ESP-IDF 5.0–5.x:** Use the **legacy** API only (`spi_nand_flash_init_device()`, page/sector helpers). The BDL Kconfig option is not available on these IDF versions. Component **1.0.0** remains compatible with this range when BDL is not used.
 - **ESP-IDF 6.0 and newer:** You may enable **`CONFIG_NAND_FLASH_ENABLE_BDL`** and use **`spi_nand_flash_init_with_layers()`** with **`esp_blockdev_t`** for block-device consumers. If BDL is **disabled**, the legacy API behaves as on older IDF versions.
+
+**Linux mmap emulation (host tests):** On the Linux target, the driver can use a memory-mapped backing file instead of SPI hardware. Configuration examples and how to build the host test app live in [`host_test/README.md`](host_test/README.md).
 
 ## Supported SPI NAND Flash chips
 
